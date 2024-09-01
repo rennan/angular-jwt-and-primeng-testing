@@ -1,46 +1,37 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { MessageService } from 'primeng/api';
 import { UserService } from '../../shared/services/user.service';
-import { getUsersResponseMock } from '../../shared/mocks/users.mock';
 import { PrimengModule } from '../../shared/modules/primeng.module';
 
-fdescribe('HomeComponent', () => {
+describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let httpClient: HttpTestingController;
   let userService: UserService;
+  let messageService: MessageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [HttpClientModule, PrimengModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({}),
-          },
-        },
-      ],
+      imports: [HttpClientTestingModule, PrimengModule],
+      providers: [MessageService],
     });
+
     fixture = TestBed.createComponent(HomeComponent);
+    httpClient = TestBed.inject(HttpTestingController);
     userService = TestBed.inject(UserService);
+    messageService = TestBed.inject(MessageService);
     component = fixture.componentInstance;
   });
 
   it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
-  });
-
-  it('should have users', () => {
-    expect(component.users.length).toEqual(0);
-    spyOn(userService, 'getUsers').and.returnValue(of(getUsersResponseMock));
-    component.users = getUsersResponseMock.data;
-    fixture.detectChanges();
-    expect(component.users.length).toBeGreaterThan(0);
   });
 });

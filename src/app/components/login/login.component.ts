@@ -43,13 +43,16 @@ export class LoginComponent {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
 
     this.loading = true;
-    this.authenticationService.login(this.loginFormControls['username'].value, this.loginFormControls['password'].value)
+    this.authenticationService
+      .login(
+        this.loginFormControls['username'].value,
+        this.loginFormControls['password'].value
+      )
       .pipe(first())
       .subscribe({
         next: () => {
