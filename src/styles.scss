@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  scrollbar-width: thin;
+  --neutral-base: #ffffff;
+  --background-base: #f5f5f5ff;
+  --default-border-radius: 4px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: thin;
+  font-family: "Inter", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  height: 100vh;
+}
+
+a, button {
+  cursor: pointer;
+  text-decoration: none;
+}

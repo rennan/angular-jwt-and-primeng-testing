@@ -1,0 +1,47 @@
+﻿<p-toast></p-toast>
+<section class="login">
+  <div class="login__background">
+    <img src="assets/images/background.jpg" alt="A picture of a hand with smartphone performing payment" />
+  </div>
+  <article class="login__content">
+    <div class="login__logo">
+      <img src="assets/images/incomm-payments-logo.png" alt="Incomm Payments Logo" height="56" />
+    </div>
+    <div class="content__card">
+      <div class="mb-4">
+        <h2 class="h6 mb-2">Log in</h2>
+        <p class="font-medium">Please enter your details</p>
+      </div>
+
+      <div class="flex flex-column">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" formControlName="username" class="form-control"
+            [ngClass]="{'is-invalid': submitted && loginFormControls['username'].errors}" />
+            <div *ngIf="submitted && loginFormControls['username'].errors" class="invalid-feedback">
+              <div *ngIf="loginFormControls['username'].errors['required']">
+                Username is required
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{
+                'is-invalid': submitted && loginFormControls['password'].errors
+              }" />
+            <div *ngIf="submitted && loginFormControls['password'].errors" class="invalid-feedback">
+              <div *ngIf="loginFormControls['password'].errors['required']">
+                Password is required
+              </div>
+            </div>
+          </div>
+          <button pButton pRipple class="btn btn-block btn-primary" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </article>
+</section>
